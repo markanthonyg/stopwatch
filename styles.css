@@ -15,17 +15,19 @@ body {
     align-items: center;
     height: 80%;
     overflow-y: auto;
+    box-shadow: inset 0 0 10px rgb(48, 48, 48);
+    border-radius: 5px;
 }
 
 .stopwatch-list-container {
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    flex-wrap: wrap;
     height: max-content;
     max-height: 75%;
-    width: 50%;
+    width: 90%;
     overflow-y: auto;
     padding: 15px;
 }
@@ -36,12 +38,35 @@ body {
 
 .stopwatch-container {
     position: relative;
-    /* display: flex;
-    flex-direction: row;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    height: max-content; */
+    height: fit-content;
+    width: fit-content;
+    background-color: #ccc;
+    padding: 20px;
+    border-radius: 15px;
+    font-family: 'Courier New', monospace;
+    font-weight: 700;
+    font-size: 20px;
+    transition: transform 0.3s ease-in-out;
+    margin: 10px;
+    cursor: pointer;
+    border-bottom: 7px solid rgb(114, 114, 114);
+    border-left: 7px solid rgb(114, 114, 114);
+}
+
+.stopwatch-container:hover {
+    transform: scale(1.2, 1.2)
+}
+
+.clock-face {
+    border-radius: 5px;
+    padding: 10px;
+    box-shadow: inset 0 0 10px rgb(48, 48, 48);
+    background-color: #fff;
 }
 
 .controlpanel-container {
@@ -52,31 +77,9 @@ body {
     align-items: center;
 }
 
-
-.stopwatch {
-    background-color: #ccc;
-    width: fit-content;
-    height: fit-content;
-    padding: 25px;
-    border-radius: 15px;
-    display: flex;
-    position: relative;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Courier New', monospace;
-    font-weight: 700;
-    font-size: 20px;
-    transition: transform 0.3s ease-in-out;
-    margin: 10px;
-    cursor:pointer;
-}
-
-.stopwatch:hover {
-    transform: scale(1.2, 1.2)
-}
-
 .remove-icon:before {
     content: '✕';
+    font-weight: bolder;
 }
 .remove-icon {
     position: absolute;
@@ -85,6 +88,20 @@ body {
     cursor: pointer;
     font-size: 15px;
     display: none;
+    transition: transform 0.3s ease-in-out;
+}
+.remove-icon:hover {
+    transform: scale(1.2, 1.2);
+}
+
+.stopwatch-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin-top: 20px
 }
 
 .button {
@@ -103,13 +120,45 @@ body {
     cursor: pointer;
 }
 
+.button-small {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70px;
+    height: 25px;
+    margin: 5px;
+    padding: 5px;
+    border-radius: 3px;
+    font-weight: bold;
+    font-size: 15px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    transition: box-shadow 0.3s ease-in-out;
+    color: #4e4e4e;
+    cursor: pointer;
+}
+
+.button-small:hover {
+    box-shadow: 0px 0px 10px 2px #727272;
+}
+
+.button-small.start {
+    background-color: #27b1d3;
+    border-bottom: 2px solid #1c7d96;
+    border-left: 2px solid #1c7d96;
+}
+
+.button-small.reset {
+    background-color: #ED7E7E;
+    border-bottom: 2px solid #b96161;
+    border-left: 2px solid #b96161;
+}
+
 .button:hover {
     box-shadow: 0px 0px 10px 2px #727272;
 }
 
 .button.add {
     background-color: #A3CC74;
-    content: '\002B';
 }
 
 .button.remove {
@@ -121,18 +170,39 @@ body {
     background-color: white !important;
 }
 
+div {
+    scrollbar-color: #d4aa70 #e4e4e4;
+    scrollbar-width: thin;
+}
+
+div::-webkit-scrollbar {
+    width: 20px;
+}
+
+div::-webkit-scrollbar-track {
+    background-color: #e4e4e4;
+    border-radius: 100px;
+}
+
+div::-webkit-scrollbar-thumb {
+    border-radius: 100px;
+    border: 5px solid transparent;
+    background-clip: content-box;
+    background-color: #2f58c9;
+}
+
 @keyframes wiggle {
     0% {
         transform: rotate(0deg);
     }
     25% {
-        transform: rotate(-3deg);
+        transform: rotate(-2deg);
     }
     50% {
         transform: rotate(0deg);
     }
     75% {
-        transform: rotate(3deg);
+        transform: rotate(2deg);
     }
     100% {
         transform: rotate(0deg);
