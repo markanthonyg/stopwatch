@@ -13,7 +13,9 @@ class Stopwatch extends HTMLElement {
         super()
         
         this.classList.add('stopwatch-container')
-        this.classList.add('animate')
+
+        let stopwatch = document.createElement('div')
+        stopwatch.classList.add('stopwatch')
 
         this.clockface = document.createElement('div')
         this.clockface.classList.add('clock-face')
@@ -53,9 +55,11 @@ class Stopwatch extends HTMLElement {
         let span = document.createElement('span')
         span.classList.add('remove-icon')
         span.onclick = deleteStopwatch
+
+        stopwatch.appendChild(this.clockface)
+        stopwatch.appendChild(this.buttonpanel)
     
-        this.appendChild(this.clockface)
-        this.appendChild(this.buttonpanel)
+        this.appendChild(stopwatch)
         this.appendChild(span)
     };
 
@@ -122,29 +126,39 @@ let globals = {
 
 
 function removeButtonClicked(e) {
-    if (globals.isRemoving == false) {
-        for (let cssClass of document.styleSheets[0].cssRules) {
-            if (cssClass.selectorText == '.stopwatch-container') {
-                cssClass.style.animation = '0.3s ease 0s infinite wiggle'
-                globals.isRemoving = true
-            } else if (cssClass.selectorText == '.remove-icon') {
-                cssClass.style.display = 'inline-block'
-            }
+    globals.isRemoving = !globals.isRemoving
+    let stopwatches = document.getElementsByClassName('stopwatch');
+
+    for (let i = 0; i < stopwatches.length; i++) {
+        if (globals.isRemoving == true) {
+            stopwatches[i].classList.add('wiggle-animation')
+        } else {
+            stopwatches[i].classList.remove('wiggle-animation')
         }
+    }
+    
+    let removeIcons = document.getElementsByClassName('remove-icon');
+
+    for (let i = 0; i < removeIcons.length; i++) {
+        if (globals.isRemoving == true) {
+            removeIcons[i].style.display = 'inline-block'
+        } else {
+            removeIcons[i].style.display = 'none'
+        }
+    }
+
+    if (globals.isRemoving == true) {
         e.target.innerHTML = 'Done'
         e.target.classList.add('is-removing-button-state')
+        let addBtn = document.querySelector('.button.add')
+        addBtn.disabled = true
+        addBtn.style.cursor = 'not-allowed'
     } else {
-        for (let cssClass of document.styleSheets[0].cssRules) {
-            if (cssClass.selectorText == '.stopwatch-container') {
-                cssClass.style.animation = ''
-            } else if (cssClass.selectorText == '.remove-icon') {
-                cssClass.style.display = 'none'
-            }
-    
-        }
-        e.target.classList.remove('is-removing-button-state')
         e.target.innerHTML = 'Remove'
-        globals.isRemoving = false
+        e.target.classList.remove('is-removing-button-state')
+        let addBtn = document.querySelector('.button.add')
+        addBtn.disabled = false
+        addBtn.style.cursor = 'pointer'
     }
 }
 

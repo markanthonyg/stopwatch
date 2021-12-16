@@ -8,22 +8,12 @@
         <div class="parent-container">
             <div class="app-container">
                 <div class="stopwatch-list-container">
-                    <!-- <div class="empty-stopwatch-list">No stopwatches</div> -->
-                    <div class="stopwatch-container">
-                        <div class="stopwatch animate">
-                            <div class="clock-face">00:00:00:00</div>
-                            <div class="stopwatch-buttons">
-                                <div class="button-small start">Start</div>
-                                <div class="button-small reset">Reset</div>
-                            </div>
-                        </div>
-                        <span class="remove-icon"></span>
-                    </div>
+                    <div class="empty-stopwatch-list">No stopwatches</div>
                 </div>
             </div>
             <div class="controlpanel-container">
-                <div onclick="createStopwatch(event)" class="button add">Add</div>
-                <div onclick="removeButtonClicked(event)" class="button remove">Remove</div>
+                <button onclick="createStopwatch(event)" class="button add">Add</button>
+                <button onclick="removeButtonClicked(event)" class="button remove">Remove</button>
             </div>
         </div>
 
