@@ -1,5 +1,4 @@
 class Stopwatch extends HTMLElement {
-
     milliseconds = 0
     timerInterval;
     clockface;
@@ -116,7 +115,6 @@ class Stopwatch extends HTMLElement {
             ':' + ('0' + ms).slice(-2)
     }
 }
-
 customElements.define('stop-watch', Stopwatch)
 
 let globals = {
